@@ -77,6 +77,7 @@
     <ClInclude Include="Stock.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="Waiter.h" />
+    <ClInclude Include="WaiterAdaptee.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Butchery.cpp" />
@@ -94,6 +95,7 @@
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="Waiter.cpp" />
+    <ClCompile Include="WaiterAdaptee.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

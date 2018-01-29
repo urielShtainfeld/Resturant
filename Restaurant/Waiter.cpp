@@ -1,52 +1,36 @@
 #include "Waiter.h"
-
+#include "LinkedList.h"
 //Constractur
-Waiter::Waiter(const Employee& employee) :Employee(employee)
+Waiter::Waiter(const Employee& employee)
 {
-	orders.ClearAll();
+	this->WA = new WaiterAdaptee(employee);
 }
 
 //Getters
-Order& Waiter::getOrderByOrderId(long orderId) throw(const char*)
+const Order * Waiter::getAllOrders() const
 {
-	Node<Order> *runner = orders.GetHead();
-	while (runner != NULL)
-	{
-		if (runner->GetVal().getID() == orderId)
-		{
-			return runner->GetVal();
-		}
-		runner = runner->GetNext();
-	}
-
-	throw "There is not such order";
-}
-//Methods
-void Waiter::takeOrder(const Order& order) throw(const char*)
-{
-	Node<Order> *runner = orders.GetHead();
+	Order *orders = new Order[MAX_NUM_ORDERS];
+	LinkedList<Order> LL = WA->getAllOrders();
+	Node<Order> *runner = LL.GetHead();
 	int i = 0;
 	while (runner->GetNext() != NULL && i< MAX_NUM_ORDERS)
-	{
+	{	
+		orders[i] = runner->GetVal();
 		runner = runner->GetNext();
 		i++;
 	}
-	orders.InsertAt(order, i);
-	orders.PrintList();
+	return orders;
+}
+Order& Waiter::getOrderByOrderId(long orderId)
+{
+	return(WA->getOrderByOrderId(orderId));
+}
+//Methods
+void Waiter::takeOrder(const Order& order)
+{
+	WA->takeOrder(order);
 }
 int Waiter::serveBill(const Order& order)
 {
-	int i = 0;
-	Node<Order> *runner = orders.GetHead();
-	while (runner != NULL)
-	{
-		if (runner->GetVal().getID() == order.getID())
-		{
-			orders.RemoveAt(i);
-			break;
-		}
-		runner = runner->GetNext();
-		i++;
-	}
-	return order.calcPrice();
+	return WA->serveBill(order);
 }

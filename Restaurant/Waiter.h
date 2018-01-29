@@ -1,25 +1,23 @@
-#pragma once
-#ifndef __Waiter_H
-#define __Waiter_H
+#ifndef __WAITER_H
+#define __WAITER_H
 
 #include "Order.h"
 #include "Employee.h"
-#include "LinkedList.h"
+#include "WaiterAdaptee.h"
+
 class Waiter : public Employee
 {
 public:
 	const static int MAX_NUM_ORDERS = 10;
 
 private:
-	LinkedList<Order> orders;
 	Waiter(const Waiter& other);
-
+	WaiterAdaptee* WA;
 public:
-	//Waiter() = default;
 	Waiter(const Employee& employee);
 
 	// Getters
-	const LinkedList<Order> getAllOrders() const { return orders; }
+	const Order* getAllOrders() const;
 	//const Order& getOrderByOrderId(long orderId) const;
 	Order& getOrderByOrderId(long orderId);
 
@@ -28,4 +26,4 @@ public:
 	int serveBill(const Order& order);
 };
 
-#endif // __Waiter_H
+#endif // __WAITER_H

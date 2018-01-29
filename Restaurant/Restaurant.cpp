@@ -84,9 +84,9 @@ void Restaurant::printOrderToTable(const Table& table, const Waiter& waiter) con
 {
 	for (int i = 0; i < Waiter::MAX_NUM_ORDERS; i++)
 	{
-		if (waiter.getAllOrders().GetElement(i).getTable().getId() == table.getId())
+		if (waiter.getAllOrders()[i].getTable().getId() == table.getId())
 		{
-			waiter.getAllOrders().GetElement(i).print();
+			waiter.getAllOrders()[i].print();
 			return;
 		}
 	}
